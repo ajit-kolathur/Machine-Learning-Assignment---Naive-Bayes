@@ -99,15 +99,22 @@ def main():
     data = []
     train_data = []
     test_data = []
+    print("Starting Reading")
     read_data_file("1_data_nd.csv", data)
     read_data_file("7_data_nd.csv", data)
     read_data_file("8_data_nd.csv", data)
     read_data_file("12_data_nd.csv", data)
     read_data_file("50_data_nd.csv", data)
     read_data_file("51_data_nd.csv", data)
+    print("Reading Done")
+    print("Starting Splitting")
     split_data(data, train_data, test_data, 3)
     del data
-    test_classify(train_data,test_data)
-    print("Done")
+    print("Done Splitting")
+    print("Training Accuracy (testing training data against itself)")
+    test_classify(train_data, train_data)
+    print("Starting Testing")
+    test_classify(train_data, test_data)
+    print("Testing Done")
 if __name__ == "__main__":
     main()
