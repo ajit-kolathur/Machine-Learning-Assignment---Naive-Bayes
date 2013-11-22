@@ -65,6 +65,17 @@ def test_classify(train_data, test_data):
     # returning control
 
 
+def split_data(array, training, testing, split):
+    i = 0
+    for element in array:
+        i += 1
+        i %= 10
+        if i % 11 < (10 - split):
+            training.append(element)
+        else:
+            testing.append(element)
+
+
 def main():
     # Initializing holders for training and test data
     train_data = []
@@ -82,7 +93,19 @@ def main():
     # Calculating testing accuracy
     test_classify(train_data, test_data)
     print("Testing Done")
-    # Enc
+    print("If training and testing combined and split 70:30")
+    train_data.extend(test_data)
+    del test_data
+    array = train_data
+    del train_data
+    test_data = []
+    train_data = []
+    split_data(array, train_data, test_data, 3)
+    del array
+    print("Starting Testing 70:30 split")
+    test_classify(train_data, test_data)
+    print("Testing Done on 70:30 split")
+    # End
 
 if __name__ == "__main__":
     main()
